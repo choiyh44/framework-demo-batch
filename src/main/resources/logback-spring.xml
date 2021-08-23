@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+ 	<property name="LOG_FILE" value="c:/framework-demo-log/framework-demo.log" />
+	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+	<springProperty scope="context" name="myappName" source="spring.application.name"/>
+	<property name="MSG_FORMAT" value="%d{yyyy-MM-dd HH:mm:ss} [${myappName}] [%-5p] [%t] [%X{traceId},%X{spanId}] [%F::%M\\(%L\\)] [%X{requestURL}] : %m%n"/>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${MSG_FORMAT}</pattern>
+		</layout>
+	</appender>
+
+	<property name="COLOR_MSG_FORMAT" 
+	         value="%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr([%-5p]) %clr([%X{traceId},%X{spanId}]){magenta} %clr([%30.-30F::%-20.20M\\(%4L\\)]){cyan} %clr(:){faint} %m%n"/>
+	         
+	<appender name="COLOR_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${COLOR_MSG_FORMAT}</pattern>
+		</layout>
+	</appender>
+
+	<springProfile name="local, default">
+		<logger name="jdbc" level="OFF"/>
+		<logger name="jdbc.sqlonly" level="OFF"/>
+		<logger name="jdbc.sqltiming" level="debug"/>
+		<logger name="jdbc.audit" level="OFF"/>
+		<logger name="jdbc.resultset" level="OFF"/>
+		<logger name="jdbc.resultsettable" level="debug"/>
+		<logger name="jdbc.connection" level="OFF"/>
+		<logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" additivity="false" level='off'>
+			<appender-ref ref="COLOR_STDOUT" />
+		</logger>
+			
+		<logger name="com.x2bee.common" additivity="false" level='debug'>
+			<appender-ref ref="COLOR_STDOUT" />
+			<appender-ref ref="FILE" />
+		</logger>
+		<logger name="com.x2bee.batch" additivity="false" level='debug'>
+			<appender-ref ref="COLOR_STDOUT" />
+			<appender-ref ref="FILE" />
+		</logger>
+		<root level="info">
+			<appender-ref ref="COLOR_STDOUT" />
+			<appender-ref ref="FILE" />
+		</root>
+	</springProfile>
+
+	<springProfile name="dev, tst, stg">
+		<logger name="com.x2bee.common" additivity="false" level='info'>
+			<appender-ref ref="COLOR_STDOUT" />
+			<appender-ref ref="FILE" />
+		</logger>
+		<logger name="com.x2bee.batch" additivity="false" level='info'>
+			<appender-ref ref="COLOR_STDOUT" />
+			<appender-ref ref="FILE" />
+		</logger>
+		<root level="info">
+			<appender-ref ref="COLOR_STDOUT" />
+			<appender-ref ref="FILE" />
+		</root>
+	</springProfile>
+
+	<springProfile name="prd">
+		<logger name="com.x2bee.common" additivity="false" level='info'>
+			<appender-ref ref="COLOR_STDOUT" />
+		</logger>
+		<logger name="com.x2bee.batch" additivity="false" level='info'>
+			<appender-ref ref="COLOR_STDOUT" />
+		</logger>
+		<root level="info">
+			<appender-ref ref="COLOR_STDOUT" />
+		</root>
+	</springProfile>
+
+</configuration>

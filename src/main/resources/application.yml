@@ -1,0 +1,49 @@
+#
+# Global setting
+###########################################
+spring:
+  profiles:
+    active:
+    - local
+  main:
+    web-application-type: none    
+  batch:
+    job: 
+      enabled: true
+      names: sampleJob
+    jdbc:
+      initialize-schema: never
+mybatis:
+  type-aliases-package: com.x2bee.batch
+  mapper-locations: classpath:mapper/postgresql/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    
+---
+#
+# LOCAL Setting
+###########################################
+spring:
+  profiles: local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=x2commerce
+    driver-class-name: org.postgresql.Driver
+    username: x2commerce
+    password: x2commerce123!
+#    hikari:
+#      maximum-pool-size: 5
+#      minimum-idle: 5
+#      connection-timeout: 30000
+#      validation-timeout: 5000
+#      max-lifetime: 1800000
+#      idle-timeout: 300000
+
+logging:
+  level:
+    com.x2bee.batch: debug
+
+debug: true
+    
