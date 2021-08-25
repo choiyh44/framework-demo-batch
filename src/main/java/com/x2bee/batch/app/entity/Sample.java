@@ -1,4 +1,4 @@
-package com.x2bee.batch.app.sample.entity;
+package com.x2bee.batch.app.entity;
 
 import org.apache.ibatis.type.Alias;
 
@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Sample {
+public class Sample extends BaseCommonEntity {
 	private Long id;
 	private String name;
 	private String description;

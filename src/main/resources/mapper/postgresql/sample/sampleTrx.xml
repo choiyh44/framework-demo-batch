@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+<mapper namespace="com.x2bee.batch.app.repository.sample.SampleTrxMapper">
+
+	<!-- 샘플 정보 -->
+	<insert id="insertSample" parameterType="sample">
+		/* sampleTrxMapper.insertSample */
+		insert into sample (
+			name,
+			description,
+			sys_reg_dtime,
+			sys_regr_id,
+			sys_mod_dtime,
+			sys_modr_id)
+		values(
+			#{name},
+			#{description},
+			now(),
+			#{sysRegrId},
+			now(),
+			#{sysModrId}
+		);
+     </insert>
+
+</mapper>

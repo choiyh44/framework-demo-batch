@@ -1,6 +1,4 @@
-package com.x2bee.batch.app.sample;
-
-import java.util.List;
+package com.x2bee.batch.app.jobconfig.sample;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
@@ -9,23 +7,19 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.x2bee.batch.app.repository.sample.SampleMapper;
-import com.x2bee.batch.app.sample.entity.Sample;
+import com.x2bee.batch.app.service.sample.SampleService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class SampleTasklet implements Tasklet {
+public class SampleInsertTasklet implements Tasklet {
 	@Autowired
-	private SampleMapper sampleMapper;
+	private SampleService sampleService;
 	
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-		List<Sample> list = sampleMapper.getSampleList(new Sample());
-		for (Sample sample : list) {
-			log.info("!!!!!! executed tasklet !!!!!!: {}", sample);
-		}
+		sampleService.insertSample();
 		
 	    return RepeatStatus.FINISHED;
 	}

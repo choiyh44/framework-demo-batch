@@ -10,7 +10,7 @@ spring:
   batch:
     job: 
       enabled: true
-      names: sampleJob
+      names: ${job.name:NONE}
     jdbc:
       initialize-schema: never
 mybatis:
