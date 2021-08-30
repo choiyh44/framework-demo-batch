@@ -2,7 +2,7 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
 	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
- 	<property name="LOG_FILE" value="c:/framework-demo-log/framework-demo.log" />
+ 	<property name="LOG_FILE" value="./log/framework-demo.log" />
 	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
 
 	<springProperty scope="context" name="myappName" source="spring.application.name"/>

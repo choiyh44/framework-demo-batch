@@ -5,7 +5,7 @@
 <mapper namespace="com.x2bee.batch.app.repository.sample.SampleMapper">
 
 	<!-- 샘플 정보 -->
-	<select id="getSampleList" resultType="sample" parameterType="sample">
+	<select id="getSampleList" resultType="sample" parameterType="map">
 		/* sampleMapper.getSampleList */
 		select
 			id,
@@ -16,12 +16,14 @@
 			sys_mod_dtime,
 			sys_modr_id
 		from
-			sample;
-		<if test="id != null and id != ''">
+			sample
+		<if test="id != null">
 			<where>
-				and id = #{id}
+				and id &lt;= #{id}
 			</where>
 		</if>
+		order by id
+		LIMIT #{_pagesize} offset #{_skiprows}
      </select>
-    
+
 </mapper>
