@@ -22,7 +22,7 @@ public class SampleRollbackConfig {
     @Autowired
     private SampleRollbackTasklet sampleRollbackTasklet;
     
-    // JobBuilderFactory를 통해서 tutorialJob을 생성
+    // JobBuilderFactory를 통해서 Job을 생성
     @Bean
     public Job sampleRollbackJob() {
         return jobBuilderFactory.get("sampleRollbackJob")
@@ -31,7 +31,7 @@ public class SampleRollbackConfig {
                 .build();
     }
 
-    // StepBuilderFactory를 통해서 tutorialStep을 생성
+    // StepBuilderFactory를 통해서 Step을 생성
     @Bean
     @JobScope
     public Step sampleRollbackStep() {

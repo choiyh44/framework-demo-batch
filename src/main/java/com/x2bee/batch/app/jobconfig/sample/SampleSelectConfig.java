@@ -15,18 +15,18 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
-public class SampleInsertConfig {
+public class SampleSelectConfig {
 	private final JobBuilderFactory jobBuilderFactory; // Job 빌더 생성용
     private final StepBuilderFactory stepBuilderFactory; // Step 빌더 생성용
 
     @Autowired
-    private SampleInsertTasklet sampleInsertTasklet;
+    private SampleSelectTasklet sampleTasklet;
     
     // JobBuilderFactory를 통해서 Job을 생성
     @Bean
-    public Job sampleInsertJob() {
-        return jobBuilderFactory.get("sampleInsertJob")
-                .start(sampleInsertStep())  // Step 설정
+    public Job sampleJob() {
+        return jobBuilderFactory.get("sampleJob")
+                .start(sampleStep())  // Step 설정
                 .incrementer(new UniqueRunIdIncrementer())
                 .build();
     }
@@ -34,10 +34,10 @@ public class SampleInsertConfig {
     // StepBuilderFactory를 통해서 Step을 생성
     @Bean
     @JobScope
-    public Step sampleInsertStep() {
-        return stepBuilderFactory.get("sampleInsertStep")
-                .tasklet(sampleInsertTasklet) // Tasklet 설정
+    public Step sampleStep() {
+        return stepBuilderFactory.get("sampleStep")
+                .tasklet(sampleTasklet) // Tasklet 설정
                 .build();
     }
-
+    
 }
