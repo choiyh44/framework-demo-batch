@@ -1,7 +1,5 @@
 package com.x2bee.batch;
 
-import javax.annotation.PostConstruct;
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +23,7 @@ public class FrameworkDemoBatchApplication {
 
     // spring.batch.job.names 를 지정하지 않으면 모든 Job이 실행돼 버리기 때문에
     // 방어차원에서 넣은 job.names validation 처리    
-    @PostConstruct
+//    @PostConstruct
     public void validateJobNames() {
         log.info("jobNames : {}", jobNames);
         if (jobNames.isEmpty() || jobNames.equals("NONE")) {

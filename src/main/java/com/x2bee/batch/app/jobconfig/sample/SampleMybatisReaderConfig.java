@@ -71,7 +71,7 @@ public class SampleMybatisReaderConfig {
         return new MyBatisPagingItemReaderBuilder<Sample>()
                 .pageSize(CHUNK_SIZE)
                 .sqlSessionFactory(sqlSessionFactory)
-                .queryId("com.x2bee.batch.app.repository.sample.SampleMapper.getSampleList")
+                .queryId("com.x2bee.batch.app.repository.sample.SampleMapper.getSamplePagingList")
                 .parameterValues(parameterValues)
                 .build();
     }

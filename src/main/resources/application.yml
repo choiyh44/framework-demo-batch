@@ -5,11 +5,11 @@ spring:
   profiles:
     active:
     - local
-  main:
-    web-application-type: none    
+#  main:
+#    web-application-type: none    
   batch:
     job: 
-      enabled: true
+      enabled: false
       names: ${job.name:NONE}
     jdbc:
       initialize-schema: never
