@@ -29,17 +29,19 @@ spring:
   profiles: local
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=x2commerce
-    driver-class-name: org.postgresql.Driver
-    username: x2commerce
-    password: x2commerce123!
-#    hikari:
-#      maximum-pool-size: 5
-#      minimum-idle: 5
-#      connection-timeout: 30000
-#      validation-timeout: 5000
-#      max-lifetime: 1800000
-#      idle-timeout: 300000
+      #jdbc-url: jdbc:postgresql://13.209.86.139:5432/x2commerce
+      jdbc-url: jdbc:log4jdbc:postgresql://13.209.86.139:5432/x2commerce
+      #driver-class-name: org.postgresql.Driver
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy    
+      username: x2commerce_app
+      password: ENC(x1h8Uoq4sGhHO01GVVOLkoRqmFj/GK9dQylvkNM8erFJc42Sj9+7W9Pu5A/JXul5)
+      hikari:
+        maximum-pool-size: 500
+        minimum-idle: 5
+        connection-timeout: 30000
+        validation-timeout: 5000
+        max-lifetime: 1800000
+        idle-timeout: 300000
 
 logging:
   level:
